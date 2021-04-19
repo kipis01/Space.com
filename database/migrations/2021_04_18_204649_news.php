@@ -21,7 +21,7 @@ class News extends Migration
             $table->unsignedBigInteger('Views');
         });
 
-        Schema::create('News_Comment', function (Blueprint $table) {
+        Schema::create('News_Comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('Author');
             $table->unsignedBigInteger('Article');
@@ -38,7 +38,7 @@ class News extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('News_Comment');
+        Schema::dropIfExists('News_Comments');
         Schema::dropIfExists('News');
     }
 }

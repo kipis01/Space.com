@@ -23,7 +23,7 @@ class Forum extends Migration
             $table->boolean('HasAttachments');
         });
 
-        Schema::create('Forum_Comment', function (Blueprint $table) {
+        Schema::create('Forum_Comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('Post');
             $table->foreign('Post')->references('id')->on('Forum');
@@ -43,7 +43,7 @@ class Forum extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Forum_Comment');
+        Schema::dropIfExists('Forum_Comments');
         Schema::dropIfExists('Forum');
     }
 }

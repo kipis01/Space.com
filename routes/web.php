@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ForumController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::redirect('/', '/news');
+// Route::
+
+Route::resource('forum', ForumController::class);
