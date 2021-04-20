@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use app\Models\Forum;
-use app\Models\Forum_Comment;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Forum;
+use App\Models\Forum_Comment;
 
 class ForumController extends Controller
 {
@@ -14,10 +16,14 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('Temp');//TODO: Build the view
-        //return view('Forum');
+        $posts = DB::select('select Forum.id, Title, Date, HasAttachments, Username from forum
+        join Users on author = Users.id
+        order by Date');//TODO:Possibly a different method?
+
+        return view('Forum', compact('posts'));
     }
 
     /**
@@ -49,7 +55,8 @@ class ForumController extends Controller
      */
     public function show($id)
     {
-        //
+        $thread = Forum::all();
+        return view('ForumThread', compact('thread'));
     }
 
     /**

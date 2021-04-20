@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Forum;
+use App\Models\Wiki;
 use App\Models\User;
 
-class Forum_Comment extends Model
+class Wiki_Contributor extends Model
 {
+    protected $table = 'Wiki_Contributors';
     use HasFactory;
 
-    //protected $table = 'Forum_Comments';
-
-    public function Forum() { // FK relationship
-        return $this->belongsTo(Forum::class);
+    public function Wiki() { // FK relationship
+        return $this->belongsTo(Wiki::class);
     }
 
     public function User() { // FK relationship

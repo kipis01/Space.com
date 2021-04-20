@@ -15,11 +15,19 @@ use App\Http\Controllers\ForumController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::redirect('/', '/news');
+
+Route::get('/news', function(){
+    return view('Temp');
 });
 
-// Route::redirect('/', '/news');
-// Route::
+Route::get('/wiki', function(){
+    return view('Temp');
+});
 
 Route::resource('forum', ForumController::class);
+Route::get('/forum/{id}', [ForumController::class, 'show']);

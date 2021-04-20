@@ -1,0 +1,21 @@
+section#forum-content{
+    display: block;
+    background-image: url('../img/space-back.jpg');
+    min-height: 100vh;
+}
+
+section#forum-content .title{
+    color:crimson;
+}
+
+div.thread{
+    display: inline-block;
+    background-color: black;
+    color:white;
+    margin: 10px;
+}
+
+div.thread img{
+    display: block;
+    margin: 5px auto 5px;
+}
