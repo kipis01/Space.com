@@ -22,7 +22,7 @@ class ForumController extends Controller
         $posts = DB::select('select Forum.id, Title, Date, HasAttachments, Username from forum
         join Users on author = Users.id
         order by Date');//TODO:Possibly a different method?
-
+        //TODO:Fix ordering
         return view('Forum', compact('posts'));
     }
 
@@ -33,7 +33,7 @@ class ForumController extends Controller
      */
     public function create()
     {
-        //
+        return view("Forum_new");
     }
 
     /**
@@ -44,7 +44,9 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$forum = new Forum();
+        $forum->
+        $forum->save();*/
     }
 
     /**
@@ -55,8 +57,17 @@ class ForumController extends Controller
      */
     public function show($id)
     {
-        $thread = Forum::all();
-        return view('ForumThread', compact('thread'));
+        $post = DB::select("SELECT Forum.id, Title, Date, Message, HasAttachments, Users.Username
+        FROM Forum
+        JOIN Users on Users.id = Author
+        WHERE forum.id = $id");
+
+        $thread = DB::select("SELECT forum_comments.id, Users.Username, Date, Message, HasAttachments
+        FROM forum_comments
+        JOIN users ON users.id = forum_comments.Author
+        WHERE Post = $id");
+
+        return view('ForumThread', compact('post'), compact('thread'));
     }
 
     /**

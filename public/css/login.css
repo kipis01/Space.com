@@ -1,0 +1,17 @@
+body{
+    background-image: url('/img/Login-backg.jpg');
+}
+
+section#register{
+    width: 60vw;
+    margin:20px auto 20px;
+    background-color: black;
+    color:silver;
+}
+
+section#login{
+    width: 60vw;
+    margin:20px auto 20px;
+    background-color: black;
+    color:silver;
+}

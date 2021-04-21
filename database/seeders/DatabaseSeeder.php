@@ -73,5 +73,23 @@ class DatabaseSeeder extends Seeder
             'Message' => 'As you could probably tell, this is the second post...',
             'HasAttachments' => false,
         ]);
+
+        DB::table('Forum_Comments')->insert([
+            'id' => '1',
+            'Post' => '1',
+            'Author' => '2',
+            'Date' => $time,
+            'Message' => 'The start of something new',
+            'HasAttachments' => false,
+        ]);
+
+        DB::table('Forum_Comments')->insert([
+            'id' => '2',
+            'Post' => '1',
+            'Author' => '3',
+            'Date' => $time,
+            'Message' => 'Bump',
+            'HasAttachments' => true,
+        ]);
     }
 }

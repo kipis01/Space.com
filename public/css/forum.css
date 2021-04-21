@@ -1,6 +1,6 @@
 section#forum-content{
     display: block;
-    background-image: url('../img/space-back.jpg');
+    background-image: url('/img/space-back.jpg');
     min-height: 100vh;
 }
 
@@ -15,7 +15,16 @@ div.thread{
     margin: 10px;
 }
 
+div.thread a{
+    color:red;
+}
+
+div.thread a:hover{
+    color:silver;
+}
+
 div.thread img{
     display: block;
+    width: 150px;
     margin: 5px auto 5px;
 }

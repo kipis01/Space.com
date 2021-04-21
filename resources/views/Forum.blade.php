@@ -2,14 +2,13 @@
 <html>
     <head>
         <title>Forum</title>
-        <link rel="icon" href="/img/Logo.png">
-        <link rel="stylesheet" href="/css/default.css">
+        <x-resources/>
         <link rel="stylesheet" href="/css/forum.css">
         <?php
             function getFirstAtt($id){
                 $files = scandir("forum_data/$id");
                 foreach ($files as $i)
-                    if ($i[0] == '1')
+                    if (Str::length($i) > 1 && $i[0] == '1')
                         return $i;
             }
         ?>
@@ -23,11 +22,11 @@
             @endif
             @foreach ($posts as $i)
                 <div class="thread">
-                    <h3>{{$i->Title}}</h3>
+                    <h3><a href = "/forum/{{$i->id}}">{{$i->Title}}</a></h3>
                     <p>By: {{$i->Username}}</p>
                     <p>Started at: {{$i->Date}}</p>
                     @if ($i->HasAttachments)
-                        <img src="forum_data/{{$i->id}}/{{getFirstAtt($i->id)}}" width="100px" alt="thread img">
+                        <img src="forum_data/{{$i->id}}/{{getFirstAtt($i->id)}}" alt="thread img">
                     @endif
                 </div>
             @endforeach

@@ -4,7 +4,7 @@
         <li><a href="/news">News</a></li>
         <li><a href="/wiki">Wiki</a></li>
         <li><a href="/forum">Forum</a></li>
-        <li class="nav-right"><a href="">Sign in</a></li>
+        <li class="nav-right"><a href="/authenticate">Sign in</a></li>
     </ul>
 </nav>
 <span class="navbar-buffer"></span>

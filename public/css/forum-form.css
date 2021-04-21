@@ -1,0 +1,8 @@
+body{
+    background-image: url('/img/space-back.jpg');
+}
+
+section#creator{
+    width: 80vw;
+    background-color: black;
+}

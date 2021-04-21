@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,8 @@ Route::get('/wiki', function(){
 
 Route::resource('forum', ForumController::class);
 Route::get('/forum/{id}', [ForumController::class, 'show']);
+
+Route::resource('user', UserController::class);
+Route::get('/authenticate/register', [UserController::class, 'create']);
+
+Route::get('/authenticate', [UserController::class, 'loginScreen']);
