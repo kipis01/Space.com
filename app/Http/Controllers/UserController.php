@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -42,14 +44,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nickname' => 'unique:users,Username']);
+        $request->validate(['nickname' => 'unique:users,Username']);//TODO:Add other checks
         $profile = new User();
         $profile->Username = $request->nickname;
         $profile->Password = Hash::make($request->pass);
-        $profile->created_at = Carbon::now();
-        $profile->updated_at = Carbon::now();
+
+        $time = Carbon::now();
+        $profile->created_at = $time;
+        $profile->updated_at = $time;
+
         $profile->save();
-        return view('Login');
+        $error = 0;
+        return view('Login', compact('error'));
     }
 
     /**
@@ -59,8 +65,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {//TODO:finish this
+        return view('UserProfile');
     }
 
     /**
@@ -98,10 +104,28 @@ class UserController extends Controller
     }
 
     public function loginScreen(){//TODO:Finish this
-        return view('Login');
+        $error = 0;
+        return view('Login', compact('error'));
     }
 
-    public function login(){
+    public function login(Request $request){
+        $validator = Validator::make($request->all(), ['nickname' => 'exists:users,Username']);
+        if ($validator->fails()) {
+            $error = 1;
+            return view('Login', compact('error'));
+        }else{
+            $phash = DB::select("SELECT Password FROM Users WHERE Username = '$request->nickname'");
+            if (!Hash::check($request->pass, $phash[0]->Password)){
+                $error = 1;
+                return view('Login', compact('error'));
+            }
+        }
+        if (Auth::attempt(['Username' => $request->nickname, 'password' => $request->pass]))
+            return view('UserProfile');
+    }
 
+    public function logout(Request $request){
+        Auth::logout();
+        return view('Temp');//TODO:To be replaced with a redirect to news
     }
 }

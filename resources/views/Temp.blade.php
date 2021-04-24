@@ -3,6 +3,15 @@
     <head>
         <title>Page unavailable</title>
         <x-resources/>
+        <style>
+            body{
+                background-color: black;
+                color: silver;
+            }
+            h1{
+                margin: 20px;
+            }
+        </style>
     </head>
     <body>
         <x-navbar/>

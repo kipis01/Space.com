@@ -37,3 +37,11 @@ Route::resource('user', UserController::class);
 Route::get('/authenticate/register', [UserController::class, 'create']);
 
 Route::get('/authenticate', [UserController::class, 'loginScreen']);
+Route::post('authenticate', [UserController::class, 'login']);
+Route::get('/logout', [UserController::class, 'logout']);
+
+Route::get('/user/{id}', [UserController::class, 'show']);
+
+Route::get('/testing', function(){
+    return view('testing');
+});

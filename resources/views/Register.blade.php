@@ -5,32 +5,41 @@
         <x-resources/>
         <link rel="stylesheet" href="/css/login.css">
         <script>
-            var taken_usernames = [
-            @foreach ($usernames as $i)
-                "{{$i->Username}}",
-            @endforeach
-            ];
-            function check(){
-                let nickname = document.getElementById("nickname").value, pass = document.getElementById("pass").value, pass2 = document.getElementById("passRep").value;
-                if (nickname != "" && !taken_usernames.includes(nickname) && pass != '' && pass == pass2){
-                    document.getElementById("form").action = '{{action([App\Http\Controllers\UserController::class, 'store'])}}'
-                    document.getElementById("form").submit();
-                }//TODO: Add error messages
+            window.onload = function(){
+                taken_usernames = [
+                @foreach ($usernames as $i)
+                    "{{$i->Username}}",
+                @endforeach
+                ];
+                action = '{{action([App\Http\Controllers\UserController::class, 'store'])}}';
+                nickname = document.getElementById("nickname");
+                pass = document.getElementById("pass");
+                pass2 = document.getElementById("passRep");
+                warn1 = [document.getElementById("nickname"), document.getElementById("warn1")];
+                warn2 = [document.getElementById("passRep"), document.getElementById("warn2")];
+                warn3 = document.getElementById("warn3");
             }
         </script>
+        <script src="/js/auth.js"></script>
     </head>
     <body>
         <x-navbar/>
-        <section id="register">
-            <form method="POST" onsubmit="return false;" id="form">
+        <section id="registration">
+            <form method="POST" onsubmit="return false;" id="register" class="center">
                 @csrf
-                <label for="nickname">Choose a nickname: </label>
-                <input type="text" name="nickname" id="nickname"><br>
-                <label for="pass">Choose a password: </label>
-                <input type="password" name="pass" id="pass"><br>
-                <label for="passRep">Repeat the password</label>
-                <input type="password" name="passRep" id="passRep">
-                <input type="submit" onclick="check()">
+                <div id="fields">
+                    <label for="nickname">Choose a nickname: </label>
+                    <input type="text" name="nickname" id="nickname" oninput="checkInput()">
+                    <br><span id="warn1"></span><br>
+                    <label for="pass">Choose a password: </label>
+                    <input type="password" name="pass" id="pass" oninput="checkInput()">
+                    <br>
+                    <label for="passRep">Repeat the password</label>
+                    <input type="password" name="passRep" id="passRep" oninput="checkInput()">
+                    <br><span id="warn2"></span>
+                </div>
+                <input type="submit" value="Register" onclick="submition()"><br>
+                <span id="warn3"></span>
             </form>
         </section>
     </body>

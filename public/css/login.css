@@ -2,16 +2,50 @@ body{
     background-image: url('/img/Login-backg.jpg');
 }
 
-section#register{
+input{
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.error{
+    color:red;
+}
+
+section#registration{
     width: 60vw;
     margin:20px auto 20px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color:silver;
+    padding:20px;
+    border-radius: 20px;
 }
 
 section#login{
     width: 60vw;
     margin:20px auto 20px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color:silver;
+    padding:20px;
+    border-radius: 20px;
+}
+
+section#login div#fields{
+    display: inline-block;
+}
+
+section#login a{
+    color:green;
+}
+
+section#login a:hover{
+    color:blue;
+}
+
+section#registration div#fields{
+    padding:20px;
+}
+
+section#registration span{
+    color:red;
 }
