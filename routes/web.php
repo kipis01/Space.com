@@ -36,11 +36,14 @@ Route::get('/forum/{id}', [ForumController::class, 'show']);
 Route::resource('user', UserController::class);
 Route::get('/authenticate/register', [UserController::class, 'create']);
 
-Route::get('/authenticate', [UserController::class, 'loginScreen']);
+Route::get('/authenticate', [UserController::class, 'loginScreen']);//add a middleware for logged in users
 Route::post('authenticate', [UserController::class, 'login']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/settings/{id}', [UserController::class, 'edit'])->middleware('USpecific');
+Route::post('/settings/{id}', [UserController::class, 'update'])->middleware('USpecific');
+Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->middleware('USpecific');
 
 Route::get('/testing', function(){
     return view('testing');

@@ -17,7 +17,7 @@
         ?>
     </head>
     <body>
-        <x-navbar/>
+        <x-navbar/><!--FIXME: Profile seems to bug out-->
         <section id="main" class="thread">
             <h2 class="title center">{{$post[0]->Title}}</h2>
             <p class="right">At: {{$post[0]->Date}}</p>
@@ -34,7 +34,7 @@
                 <h3 class="center">This post has no answers yet.</h3>
             @endif
             @foreach ($thread as $i)
-                <div class="thread thread-comm">
+                <div class="thread thread-comm" id="{{$i->id}}">
                     <p class="right">At: {{$i->Date}}</p>
                     <p>By: {{$i->Username}}</p>
                     <p class="message">{{$i->Message}}</p>

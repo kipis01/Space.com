@@ -1,0 +1,36 @@
+body{
+    background-image: url("/img/prof_backg.jpg");
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: 100vw;
+}
+
+div#panel{
+    width:60vw;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 30px auto 20px;
+    color: silver;
+}
+
+div#profile-card{
+    width: 500px;
+    background-color: #011a38;
+}
+
+div#profile-info{
+    margin: auto;
+}
+
+div#forum{
+
+}
+
+div.box{
+    width: 100%;
+    margin-top: 10px;
+}
+
+div.user{
+    width: 100%;
+    margin-top: 20px;
+}

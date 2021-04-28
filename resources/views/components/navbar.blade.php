@@ -1,11 +1,4 @@
-<?php
-function findpfp($dir){
-    $files = scandir($dir);
-    foreach ($files as $i)
-        if (Str::startsWith($i, 'pfp'))
-            return $i;
-}
-?>
+<?php include_once '../resources/php/functions.php' ?>
 <nav id="navbar">
     <ul>
         <li class="logo"><img src="/img/Logo.png" width="50px"></li>
@@ -21,7 +14,8 @@ function findpfp($dir){
             </a>
             <ul class="dropdown">
                 <li><a href="/user/{{Auth::user()->id}}">Profile</a></li>
-                <li><a href="/settings">Settings</a></li><!--TODO:Add this-->
+                <li><a href="/settings/{{Auth::user()->id}}">Settings</a></li>
+                <li><a href="/user">Users</a></li>
                 <li><a href="/logout">Sign out</a></li>
             </ul>
         </li>

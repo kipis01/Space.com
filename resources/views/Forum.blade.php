@@ -4,14 +4,7 @@
         <title>Forum</title>
         <x-resources/>
         <link rel="stylesheet" href="/css/forum.css">
-        <?php
-            function getFirstAtt($id){
-                $files = scandir("forum_data/$id");
-                foreach ($files as $i)
-                    if (Str::length($i) > 1 && $i[0] == '1')
-                        return $i;
-            }
-        ?>
+        <?php include_once '../resources/php/functions.php' ?>
     </head>
     <body>
         <x-navbar/><!-- :message='$message' -->
@@ -26,7 +19,7 @@
                     <p>By: {{$i->Username}}</p>
                     <p>Started at: {{$i->Date}}</p>
                     @if ($i->HasAttachments)
-                        <img src="forum_data/{{$i->id}}/{{getFirstAtt($i->id)}}" alt="thread img">
+                        <img src="forum_data/{{$i->id}}/{{getFirstAtt("forum_data/$i->id")}}" alt="thread img">
                     @endif
                 </div>
             @endforeach

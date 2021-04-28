@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\User;
+use Storage;
+use File;
+use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
+
+include_once '../resources/php/functions.php';
 
 class UserController extends Controller
 {
@@ -20,9 +26,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        /*$users = User::all();
-        return view('', $users);*/
-        //TODO: Finish this
+        $users = DB::select("SELECT id, Username, Role, created_at FROM Users");
+        return view('UserList', compact('users'));
     }
 
     /**
@@ -54,6 +59,11 @@ class UserController extends Controller
         $profile->updated_at = $time;
 
         $profile->save();
+        $id = DB::select("SELECT id FROM Users WHERE Username = '$request->nickname'");
+
+        mkdir("Users/" . $id[0]->id);
+        copy("../resources/img/pfp.png", "Users/".$id[0]->id."/pfp.png");
+
         $error = 0;
         return view('Login', compact('error'));
     }
@@ -65,8 +75,16 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {//TODO:finish this
-        return view('UserProfile');
+    {
+        $profile = DB::select("SELECT id, Username, Role, created_at FROM users WHERE id = $id");
+        $forumPosts = DB::select("SELECT id, Title, Date, Message, HasAttachments FROM forum WHERE Author = $id ORDER BY Date");
+        $forumComments = DB::select("SELECT id, Post, Date, Message, HasAttachments FROM Forum_comments where Author = $id");
+        //TODO:Add wiki and News, when those are finished
+        return view('UserProfile', [
+            'profile' => $profile,
+            'forumPosts' => $forumPosts,
+            'forumComments' => $forumComments,
+        ]);
     }
 
     /**
@@ -77,7 +95,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = DB::select("SELECT id, Username, Role FROM Users WHERE id = $id");
+        return view("Settings", compact('user'));
     }
 
     /**
@@ -89,7 +108,39 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $phash = DB::select("SELECT Password FROM Users WHERE id =".Auth::user()->id);
+        if (!Hash::check($request->pass, $phash[0]->Password)){
+            return view('404'); //TODO: Add an error screen
+        }
+
+        $validator = Validator::make($request->all(), ['nickname' => 'unique:users,Username']);
+        if ($validator->fails() && $request->nickname != '')
+            return view('404');
+        else if ($request->nickname != ''){
+            DB::update("UPDATE Users SET Username = '$request->nickname', updated_at = '".Carbon::now()."' WHERE id = $id");
+        }
+
+        /*$validatedData = $request->validate([
+         'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);*/
+
+        $file = $request->file('pfp');
+        if ($file != null){
+            unlink("Users/$id/".findpfp("Users/$id"));
+            $file->move("Users/$id", "pfp.".$file->getClientOriginalExtension());
+            DB::update("UPDATE Users SET updated_at = '".Carbon::now()."' WHERE id = $id");
+        }
+
+        if ($request->pass1 == $request->pass2 && $request->pass1 != ''){
+            DB::update("UPDATE Users SET Password = '".Hash::make($request->pass1)."', updated_at = '".Carbon::now()."' WHERE id = $id");
+        }
+
+        $user = DB::select("SELECT Role FROM users WHERE id = $id");
+        if($request->role != null && $request->role != $user[0]->Role){
+            DB::update("UPDATE Users SET Role = '$request->role', updated_at = '".Carbon::now()."' WHERE id = $id");
+        }
+
+        return redirect("/user/$id");
     }
 
     /**
@@ -100,7 +151,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->id == $id)
+            Auth::logout();
+        DB::delete("DELETE FROM News_Comments WHERE Author = $id");
+        DB::delete("DELETE FROM News WHERE Author = $id");
+        DB::delete("DELETE FROM Forum_Comments WHERE Author = $id");
+        DB::delete("DELETE FROM Forum WHERE Author = $id");
+        DB::delete("DELETE FROM Wiki_Contributors WHERE Contributor = $id");
+        DB::delete("DELETE FROM Wiki WHERE Author = $id");
+        DB::delete("DELETE FROM Users WHERE id = $id");
+        File::deleteDirectory(public_path()."/Users/$id");
+        return redirect('/');
     }
 
     public function loginScreen(){//TODO:Finish this
@@ -121,11 +182,12 @@ class UserController extends Controller
             }
         }
         if (Auth::attempt(['Username' => $request->nickname, 'password' => $request->pass]))
-            return view('UserProfile');
+            return redirect("/user/".Auth::user()->id);
+        else return view('404');
     }
 
     public function logout(Request $request){
         Auth::logout();
-        return view('Temp');//TODO:To be replaced with a redirect to news
+        return redirect('/news');//TODO:To be replaced with a redirect to news
     }
 }

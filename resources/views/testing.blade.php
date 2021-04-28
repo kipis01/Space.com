@@ -11,7 +11,7 @@
     </head>
     <body>
         @if (isset($dump))
-            <p>{{print_r($dump)}}</p>
+            <p><?php print_r($dump) ?></p>
         @else
             <p>Nothing in dump</p>
         @endif
