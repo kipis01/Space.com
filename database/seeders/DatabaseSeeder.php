@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         DB::table('Users')->insert([
             'id' => '1',
             'Username' => 'Admin',
+            'email' => 'admin@space.com',
             'password' => Hash::make('Admin'),
             'role' => 'Admin',
             'remember_token' => '',
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
         DB::table('Users')->insert([
             'id' => '2',
             'Username' => 'Editor',
+            'email' => 'editor@space.com',
             'password' => Hash::make('Editor'),
             'role' => 'Editor',
             'remember_token' => '',
@@ -49,6 +51,7 @@ class DatabaseSeeder extends Seeder
         DB::table('Users')->insert([
             'id' => '3',
             'Username' => 'User',
+            'email' => 'user@space.com',
             'password' => Hash::make('User'),
             'role' => 'User',
             'remember_token' => '',

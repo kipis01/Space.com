@@ -35,11 +35,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $usernames = DB::select('select Username from Users');
-        return view("Register", compact('usernames'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,26 +42,6 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $request->validate(['nickname' => 'unique:users,Username']);//TODO:Add other checks
-        $profile = new User();
-        $profile->Username = $request->nickname;
-        $profile->Password = Hash::make($request->pass);
-
-        $time = Carbon::now();
-        $profile->created_at = $time;
-        $profile->updated_at = $time;
-
-        $profile->save();
-        $id = DB::select("SELECT id FROM Users WHERE Username = '$request->nickname'");
-
-        mkdir("Users/" . $id[0]->id);
-        copy("../resources/img/pfp.png", "Users/".$id[0]->id."/pfp.png");
-
-        $error = 0;
-        return view('Login', compact('error'));
-    }
 
     /**
      * Display the specified resource.
@@ -107,7 +82,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {//TODO:Add email changing adn clean this up
         $phash = DB::select("SELECT Password FROM Users WHERE id =".Auth::user()->id);
         if (!Hash::check($request->pass, $phash[0]->Password)){
             return view('404'); //TODO: Add an error screen
@@ -162,32 +137,5 @@ class UserController extends Controller
         DB::delete("DELETE FROM Users WHERE id = $id");
         File::deleteDirectory(public_path()."/Users/$id");
         return redirect('/');
-    }
-
-    public function loginScreen(){//TODO:Finish this
-        $error = 0;
-        return view('Login', compact('error'));
-    }
-
-    public function login(Request $request){
-        $validator = Validator::make($request->all(), ['nickname' => 'exists:users,Username']);
-        if ($validator->fails()) {
-            $error = 1;
-            return view('Login', compact('error'));
-        }else{
-            $phash = DB::select("SELECT Password FROM Users WHERE Username = '$request->nickname'");
-            if (!Hash::check($request->pass, $phash[0]->Password)){
-                $error = 1;
-                return view('Login', compact('error'));
-            }
-        }
-        if (Auth::attempt(['Username' => $request->nickname, 'password' => $request->pass]))
-            return redirect("/user/".Auth::user()->id);
-        else return view('404');
-    }
-
-    public function logout(Request $request){
-        Auth::logout();
-        return redirect('/news');//TODO:To be replaced with a redirect to news
     }
 }

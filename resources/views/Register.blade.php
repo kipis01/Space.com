@@ -10,7 +10,7 @@
                 @foreach ($usernames as $i)
                     "{{$i->Username}}",
                 @endforeach
-                ];
+                ];//TODO:Implement with ajax?
                 action = '{{action([App\Http\Controllers\UserController::class, 'store'])}}';
                 nickname = document.getElementById("nickname");
                 pass = document.getElementById("pass");
