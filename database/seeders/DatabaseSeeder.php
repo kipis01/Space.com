@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'id' => '1',
             'Author' => '1',
             'Title' => 'First post',
-            'Date' => $time,
+            'created_at' => $time,
             'Message' => 'This is the first post!',
             'HasAttachments' => true,
         ]);
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
             'id' => '2',
             'Author' => '2',
             'Title' => 'Second post',
-            'Date' => $time,
+            'created_at' => $time,
             'Message' => 'As you could probably tell, this is the second post...',
             'HasAttachments' => false,
         ]);
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             'id' => '1',
             'Post' => '1',
             'Author' => '2',
-            'Date' => $time,
+            'created_at' => $time,
             'Message' => 'The start of something new',
             'HasAttachments' => false,
         ]);
@@ -90,7 +90,7 @@ class DatabaseSeeder extends Seeder
             'id' => '2',
             'Post' => '1',
             'Author' => '3',
-            'Date' => $time,
+            'created_at' => $time,
             'Message' => 'Bump',
             'HasAttachments' => true,
         ]);

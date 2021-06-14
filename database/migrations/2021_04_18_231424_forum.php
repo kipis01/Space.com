@@ -18,9 +18,9 @@ class Forum extends Migration
             $table->unsignedBigInteger('Author');
             $table->foreign('Author')->references('id')->on('users');
             $table->string('Title');
-            $table->timestamp('Date');
+            $table->timestamps();
             $table->text('Message');
-            $table->boolean('HasAttachments');
+            $table->boolean('HasAttachments')->default(false);
         });
 
         Schema::create('Forum_Comments', function (Blueprint $table) {
@@ -30,9 +30,9 @@ class Forum extends Migration
             $table->unsignedBigInteger('Author');
             $table->foreign('Author')->references('id')->on('users');
 
-            $table->timestamp('Date');
+            $table->timestamps();
             $table->text('Message');
-            $table->boolean('HasAttachments');
+            $table->boolean('HasAttachments')->default(false);
         });
     }
 

@@ -27,13 +27,11 @@ Route::get('/wiki', function(){
 });
 
 Route::resource('forum', ForumController::class);
+Route::post('forum', [ForumController::class, 'store'])->name('NewForumPost');
 Route::get('/forum/{id}', [ForumController::class, 'show']);
+Route::post('/forum/{id}', [ForumController::class, 'storeComment']);
 
 Route::resource('user', UserController::class);
-//Route::get('/authenticate/register', [UserController::class, 'create']);//TODO:Remove
-
-//Route::get('/authenticate', [UserController::class, 'loginScreen']);//add a middleware for logged in users
-//Route::post('authenticate', [UserController::class, 'login']);//TODO:Remove
 
 Route::get('/user/{id}', [UserController::class, 'show']);
 Route::get('/settings/{id}', [UserController::class, 'edit'])->middleware('USpecific');
@@ -43,14 +41,6 @@ Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->middleware(
 Route::get('/testing', function(){
     return view('testing');
 });
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 Route::redirect('/dashboard', '/');
 

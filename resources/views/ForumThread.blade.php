@@ -17,10 +17,10 @@
         ?>
     </head>
     <body>
-        <x-navbar/><!--FIXME: Profile seems to bug out-->
+        <x-navbar/>
         <section id="main" class="thread">
             <h2 class="title center">{{$post[0]->Title}}</h2>
-            <p class="right">At: {{$post[0]->Date}}</p>
+            <p class="right">At: {{$post[0]->created_at}}</p>
             <p>By: {{$post[0]->Username}}</p>
             <p class="message">{{$post[0]->Message}}</p>
             @if ($post[0]->HasAttachments)
@@ -35,16 +35,33 @@
             @endif
             @foreach ($thread as $i)
                 <div class="thread thread-comm" id="{{$i->id}}">
-                    <p class="right">At: {{$i->Date}}</p>
+                    <p class="right">At: {{$i->created_at}}</p>
                     <p>By: {{$i->Username}}</p>
                     <p class="message">{{$i->Message}}</p>
                     @if ($i->HasAttachments)
                         @foreach (getAtt('forum_data/' . $post[0]->id . "/$i->id") as $k)
-                            <img src= "/forum_data/{{$post[0]->id}}/{{$i->id}}/{{$k}}" alt="image">
+                            <img class="content" src= "/forum_data/{{$post[0]->id}}/{{$i->id}}/{{$k}}" alt="image">
                         @endforeach
                     @endif
                 </div>
             @endforeach
+            @if (isset(Auth::user()->id))
+                <div class="center">
+                    <form method="POST" onsubmit="forum/{{$post[0]->id}}" enctype="multipart/form-data">
+                        @csrf
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required="required"></textarea><br>
+                        <label for="file1">1st picture:</label>
+                        <input name="file1" type="file" id="file1"><br>
+                        <label for="file2">2nd picture:</label>
+                        <input name="file2" type="file" id="file2"><br>
+                        <label for="file3">3rd picture:</label>
+                        <input name="file3" type="file" id="file3"><br><br>
+                        <input type="submit">
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    </form>
+                </div>
+            @endif
         </section>
     </body>
 </html>

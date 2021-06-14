@@ -4,7 +4,6 @@
         <title>Registration</title>
         <x-resources/>
         <link rel="stylesheet" href="/css/login.css">
-        <script src="/js/jquery-3.6.0.js"></script>
         <script>
             function checkInput(){
                 if ($('#password').val() != $('#pass2').val())
@@ -12,7 +11,7 @@
                 else warning($('#warn2'));
             }//TODO:Implement username check with ajax
         </script>
-        <script src="/js/warn.js"></script>
+        <script src="/js/common.js"></script>
     </head>
     <body>
         <x-navbar/>

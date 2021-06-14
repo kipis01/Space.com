@@ -24,11 +24,21 @@ p{
     margin:5px 10px 5px;
 }
 
-img{
+img.content{
     max-width: 70vw;
     margin: 10px;
 }
 
 p.message{
     background-color: #3c3c3c;
+}
+
+form{
+    display: inline-block;
+    background-color: black;
+    color:silver;
+    margin: auto;
+    border-radius: 20px;
+    border:rgb(94, 94, 94) solid 2px;
+    padding:10px;
 }

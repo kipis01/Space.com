@@ -23,6 +23,19 @@ body{
     display: flex;
 }
 
+.file-drop{
+    display: inline-block;
+    margin: 0 20px 0;
+    width: 40vw;
+    height:20vh;
+    border: solid 2px silver;
+    border-radius: 20px;
+}
+
+.hidden{
+    display: none;
+}
+
 span.navbar-buffer{
     display: block;
     width: 100%;

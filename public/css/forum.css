@@ -13,6 +13,7 @@ div.thread{
     background-color: black;
     color:white;
     margin: 10px;
+    padding: 0 10px 0;
 }
 
 div.thread a{
@@ -27,4 +28,14 @@ div.thread img{
     display: block;
     width: 150px;
     margin: 5px auto 5px;
+}
+
+div#forumform form{
+    display: inline-block;
+    background-color: black;
+    color:silver;
+    margin: auto;
+    border-radius: 20px;
+    border:rgb(94, 94, 94) solid 2px;
+    padding:10px;
 }
