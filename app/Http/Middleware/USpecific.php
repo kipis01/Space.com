@@ -16,8 +16,9 @@ class USpecific
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $id = null)
     {
+        if($id != null);
         if (!isset(Auth::user()->id))
             abort(403, "Unauthorized");
         else if(Auth::user()->id == $request->id || Auth::user()->role == "Admin")

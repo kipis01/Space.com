@@ -1,0 +1,39 @@
+body{
+    background-image: url('/img/News-back.jpg');
+    background-size: 100vw;
+    background-color: black;
+    background-repeat: no-repeat;
+}
+
+a{
+    color: rgb(175, 0, 0);
+    text-decoration: none;
+}
+
+.artpic{
+    max-height: 60vh;
+    max-width: 70vw;
+}
+
+div#main{
+    width: 80vw;
+    background-color: rgba(0, 0, 0, 0.85);
+    color:silver;
+    height: 100%;
+}
+
+div.article{
+    width:60vw;
+    margin: 20px auto 20px;
+    border: solid 2px rgb(61, 53, 53);
+}
+
+div.img img{
+    max-width: 40vw;
+    max-height: 40vh;
+}
+
+div.comment{
+    border:solid rgb(175, 0, 0) 2px;
+    margin: 10px;
+}

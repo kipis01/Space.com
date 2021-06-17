@@ -15,10 +15,11 @@ class News extends Migration
     {
         Schema::create('News', function (Blueprint $table) {
             $table->id();
+            $table->string('Title');
             $table->unsignedBigInteger('Author');
             $table->foreign('Author')->references('id')->on('users');
             $table->timestamps();
-            $table->unsignedBigInteger('Views');
+            $table->unsignedBigInteger('Views')->default(0);
         });
 
         Schema::create('News_Comments', function (Blueprint $table) {
@@ -27,6 +28,7 @@ class News extends Migration
             $table->unsignedBigInteger('Article');
             $table->foreign('Author')->references('id')->on('users');
             $table->foreign('Article')->references('id')->on('News');
+            $table->timestamps();
             $table->text('Message');
         });
     }

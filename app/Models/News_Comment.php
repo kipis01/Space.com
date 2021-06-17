@@ -11,6 +11,13 @@ use App\Models\User;
 class News_Comment extends Model
 {
     protected $table = 'News_Comments';
+
+    protected $fillable = [
+        'Article',
+        'Author',
+        'Message'
+    ];
+
     use HasFactory;
 
     public function News() { // FK relationship
@@ -18,6 +25,6 @@ class News_Comment extends Model
     }
 
     public function User() { // FK relationship
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'Author');
     }
 }

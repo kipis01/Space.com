@@ -32,7 +32,7 @@
                                 @endif
                                 <div class="center">
                                     <h3><a href="/forum/{{$i->id}}">{{$i->Title}}</a></h3>
-                                    <p>Posted: {{$i->Date}}</p>
+                                    <p>Posted: {{$i->created_at}}</p>
                                     <p>{{$i->Message}}</p>
                                 </div>
                             </div>
@@ -40,13 +40,13 @@
                     @endif
                     @if ($forumComments != [])
                         <h3 class="center">Forum interactions</h3>
-                        @foreach ($forumComments as $i)<!--id, Post, Date, Message, HasAttachments-->
+                        @foreach ($forumComments as $i)<!--id, Post, created_at, Message, HasAttachments-->
                             <div class="box center flex">
                                 @if ($i->HasAttachments)
                                     <div class="center"><img src="/forum_data/{{$i->Post}}/{{$i->id}}/{{getFirstAtt("forum_data/$i->Post/$i->id")}}" alt="main media" width="300px"></div>
                                 @endif
                                 <div class="center">
-                                    <p><a href="/forum/{{$i->Post}}#{{$i->id}}">Posted: {{$i->Date}}</a></p>
+                                    <p><a href="/forum/{{$i->Post}}#{{$i->id}}">Posted: {{$i->created_at}}</a></p>
                                     <p>{{$i->Message}}</p>
                                 </div>
                             </div>

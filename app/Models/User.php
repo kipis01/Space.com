@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 use App\Models\Forum;
 use App\Models\Forum_Comment;
+use App\Models\News;
+use App\Models\News_Comment;
 
 class User extends Authenticatable
 {
@@ -50,5 +52,13 @@ class User extends Authenticatable
 
     public function Forum_Comment(){
         return $this->hasMany(Forum_Comment::class);
+    }
+
+    public function News(){
+        return $this->hasMany(News::class);
+    }
+
+    public function News_Comment(){
+        return $this->hasMany(News_Comment::class);
     }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+    <head>
+        <pic>0a472e88bb17d2103023282872d07c80.jpg</pic>
+        <text>
+            Today we are launching the news section of this site!
+        </text>
+        <elementc>6</elementc>
+    </head>
+    <content>
+        <d1><type>img</type><alt>Image of a writer</alt>writer.jpg</d1>
+        <d2><type>p</type><a>0</a>Anybody, who has the "Edittor" role will be able to write news articles. Aditionally, Edittors will be able to edit their own articles, should they find any mistakes.</d2>
+        <d3>user.png<type>img</type><alt>Default user profile image</alt></d3>
+        <d4><type>p</type><a>1</a>You can take a look at everyones roles using</d4>
+        <d5><type>a</type><href>http://space.com/user</href>this link</d5>
+        <d6><type>p</type><a>-1</a>.</d6>
+    </content>
+</article>

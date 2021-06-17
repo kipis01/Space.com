@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
             'created_at' => $time,
             'updated_at' => $time,
         ]);
-
         DB::table('Users')->insert([
             'id' => '2',
             'Username' => 'Editor',
@@ -47,7 +46,6 @@ class DatabaseSeeder extends Seeder
             'created_at' => $time,
             'updated_at' => $time,
         ]);
-
         DB::table('Users')->insert([
             'id' => '3',
             'Username' => 'User',
@@ -67,7 +65,6 @@ class DatabaseSeeder extends Seeder
             'Message' => 'This is the first post!',
             'HasAttachments' => true,
         ]);
-
         DB::table('Forum')->insert([
             'id' => '2',
             'Author' => '2',
@@ -85,7 +82,6 @@ class DatabaseSeeder extends Seeder
             'Message' => 'The start of something new',
             'HasAttachments' => false,
         ]);
-
         DB::table('Forum_Comments')->insert([
             'id' => '2',
             'Post' => '1',
@@ -93,6 +89,34 @@ class DatabaseSeeder extends Seeder
             'created_at' => $time,
             'Message' => 'Bump',
             'HasAttachments' => true,
+        ]);
+
+        DB::table('News')->insert([
+            'id' => '1',
+            'Title' => 'The beginning of space.com news!',
+            'Author' => '1',
+            'created_at' => $time,
+        ]);
+        DB::table('News')->insert([
+            'id' => '2',
+            'Title' => "NASA's Perseverance Rover Begins Its First Science Campaign on Mars",
+            'Author' => '2',
+            'created_at' => $time,
+        ]);
+
+        DB::table('News_Comments')->insert([
+            'id' => '1',
+            'Author' => '2',
+            'Article' => '1',
+            'created_at' => $time,
+            'Message' => 'Good to hear! New articles coming soon...',
+        ]);
+        DB::table('News_Comments')->insert([
+            'id' => '2',
+            'Author' => '3',
+            'Article' => '1',
+            'created_at' => $time,
+            'Message' => 'Interesting...',
         ]);
     }
 }

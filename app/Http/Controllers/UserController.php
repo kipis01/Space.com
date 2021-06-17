@@ -52,8 +52,8 @@ class UserController extends Controller
     public function show($id)
     {
         $profile = DB::select("SELECT id, Username, Role, created_at FROM users WHERE id = $id");
-        $forumPosts = DB::select("SELECT id, Title, Date, Message, HasAttachments FROM forum WHERE Author = $id ORDER BY Date");
-        $forumComments = DB::select("SELECT id, Post, Date, Message, HasAttachments FROM Forum_comments where Author = $id");
+        $forumPosts = DB::select("SELECT id, Title, created_at, Message, HasAttachments FROM forum WHERE Author = $id ORDER BY created_at");
+        $forumComments = DB::select("SELECT id, Post, created_at, Message, HasAttachments FROM Forum_comments where Author = $id");
         //TODO:Add wiki and News, when those are finished
         return view('UserProfile', [
             'profile' => $profile,

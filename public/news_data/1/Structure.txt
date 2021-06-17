@@ -1,2 +1,0 @@
-This application has been built using the Laravel framework.
-<img>

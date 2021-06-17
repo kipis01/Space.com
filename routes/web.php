@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,6 @@ use App\Http\Controllers\UserController;
 
 Route::redirect('/', '/news');
 
-Route::get('/news', function(){
-    return view('Temp');
-});
-
 Route::get('/wiki', function(){
     return view('Temp');
 });
@@ -30,6 +27,15 @@ Route::resource('forum', ForumController::class);
 Route::post('forum', [ForumController::class, 'store'])->name('NewForumPost');
 Route::get('/forum/{id}', [ForumController::class, 'show']);
 Route::post('/forum/{id}', [ForumController::class, 'storeComment']);
+
+Route::get('/news', [NewsController::class, 'index']);
+Route::get('/news/search', [NewsController::class, 'search'])->name('newsSearch');
+Route::get('/news/{id}', [NewsController::class, 'show'])->where('id', '[0-9]+');
+Route::post('/news/{id}', [NewsController::class, 'storeComment'])->middleware('auth')->where('id', '[0-9]+');
+Route::get('/news/new', [NewsController::class, 'create'])->middleware('auth')->middleware('minimumAccess:Editor');
+Route::post('/news/new', [NewsController::class, 'store'])->name('newArticle')->middleware('auth')->middleware('minimumAccess:Editor');
+Route::get('news/edit/{id}', [NewsController::class, 'edit']);
+Route::post('news/edit/{id}', [NewsController::class, 'update']);
 
 Route::resource('user', UserController::class);
 
