@@ -187,7 +187,7 @@ class NewsController extends Controller
         $img = $request->file("main_pic");
         $imgName = $xml->head->pic[0];
         if ($img != null){
-            unlink("../public/news_data/".$xml->head->pic);
+            unlink("../public/news_data/$article->id/".$xml->head->pic);
             $img->move("../public/news_data/$article->id", $img->getClientOriginalName());
             $imgName = $img->getClientOriginalName();
         }
