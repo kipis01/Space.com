@@ -10,7 +10,10 @@
         <x-navbar/>
         <div id="main" class="center">
             @if (isset(Auth::user()->id) && (Auth::user()->id == $article['Author'] || Auth::user()->role == 'Admin'))
-                <h5><a href="/news/edit/{{$article['id']}}">Edit this article</a></h5>
+                <h5><a href="/news/edit/{{$article['id']}}">{{__('messages.Edit this article')}}</a></h5>
+                @if (Auth::user()->role == 'Admin')
+                    <h5><a href="/news/delete/{{$article['id']}}" style="background-color:red;">{{__('messages.Delete this article')}}</a></h5>
+                @endif
             @endif
             <h1 class="center">{{$article['Title']}}</h5>
             <img src="/news_data/{{$article['id']}}/{{$xml->head->pic}}" class="artpic" alt="Main article picture">
@@ -36,7 +39,7 @@
                 @if (isset(Auth::user()->id))
                     <form method="POST" onsubmit="/news/{{$article['id']}}">
                         @csrf
-                        <label for="message">Comment: </label>
+                        <label for="message">{{__('messages.Comment')}}: </label>
                         <textarea name="message" id="message" cols="80" rows="2" required="required"></textarea>
                         <input type="submit">
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />

@@ -28,13 +28,13 @@
             <form method="POST" onsubmit="return false;" id="register" class="center">
                 @csrf
                 <div id="fields">
-                    <label for="nickname">Choose a nickname: </label>
+                    <label for="nickname">{{__('messages.Choose a nickname')}}: </label>
                     <input type="text" name="nickname" id="nickname" oninput="checkInput()">
                     <br><span id="warn1"></span><br>
-                    <label for="pass">Choose a password: </label>
+                    <label for="pass">{{__('messages.Choose a password')}}: </label>
                     <input type="password" name="pass" id="pass" oninput="checkInput()">
                     <br>
-                    <label for="passRep">Repeat the password</label>
+                    <label for="passRep">{{__('messages.Repeat the password')}}</label>
                     <input type="password" name="passRep" id="passRep" oninput="checkInput()">
                     <br><span id="warn2"></span>
                 </div>

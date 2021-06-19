@@ -172,9 +172,9 @@
                                     <input type="hidden" value="hr" name="shr{{$i}}">
                                     <p>devider</p>
                                 @else
-                                    <label for="sname{{$i}}">Name:</label>
+                                    <label for="sname{{$i}}">{{__('messages.Name')}}:</label>
                                     <input name="sname{{$i}}" value="{{$d->name}}">
-                                    <label for="sdata{{$i}}">Data:</label>
+                                    <label for="sdata{{$i}}">{{__('messages.Data')}}:</label>
                                     <input name="sdata{{$i}}" value="{{$d->data}}">
                                 @endif
                             </div>
@@ -196,7 +196,7 @@
                         @foreach ($xml->content->topics->children() as $topic)
                             <div id="tg{{$i}}">
                                 @if(isset($topic->title))
-                                <label for="ttopic{{$i}}">Main title</label>
+                                <label for="ttopic{{$i}}">{{__('messages.Main title')}}Main title</label>
                                 <input name="ttopic{{$i}}" value="{{$topic->title}}">
                                 <?php $k = 1; ?>
                                 @foreach ($topic->children() as $subtopic)
@@ -212,9 +212,9 @@
                                         <div id="d{{$i}}_{{$k}}">
                                             <img src="/wiki_data/{{$article->id}}/{{$subtopic}}" alt="{{$subtopic->alt}}" width="200px">
                                             <input type="file" name="smallFile{{$i}}_{{$k}}">
-                                            <label for="smallFileTitle{{$i}}_{{$k}}">File title</label>
+                                            <label for="smallFileTitle{{$i}}_{{$k}}">{{__('messages.File title')}}</label>
                                             <input name="smallFileTitle{{$i}}_{{$k}}" value="{{$subtopic->desc}}">
-                                            <label for="smallFileAlt{{$i}}_{{$k}}">File alt</label>
+                                            <label for="smallFileAlt{{$i}}_{{$k}}">{{__('messages.File alt')}}</label>
                                             <input name="smallFileAlt{{$i}}_{{$k}}" value="{{$subtopic->alt}}">
                                         </div>
                                         <?php $k++ ?>
@@ -242,17 +242,17 @@
                             <?php $i = 0; ?>
                             @foreach ($xml->content->references->children() as $reference)
                                 <div id="refd{{$i}}">
-                                    <label for="ref{{$i}}">Link: </label>
+                                    <label for="ref{{$i}}">{{__('messages.Link')}}: </label>
                                     <input name="ref{{$i}}" value="{{$reference->href}}">
-                                    <label for="reft{{$i}}">Text: </label>
+                                    <label for="reft{{$i}}">{{__('messages.Text')}}: </label>
                                     <input name="reft{{$i}}" value="{{$reference}}">
                                 </div>
                                 <?php $i++; ?>
                             @endforeach
                         @endif
                     </div>
-                    <button id="addRefference" type="button">Add a refference</button>
-                    <button id="remRefference" type="button">Remove a refference</button>
+                    <button id="addRefference" type="button">{{__('messages.Add a reference')}}</button>
+                    <button id="remRefference" type="button">{{__('messages.Remove a reference')}}</button>
                 </div>
             </form>
         </div>

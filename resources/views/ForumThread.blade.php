@@ -20,8 +20,8 @@
         <x-navbar/>
         <section id="main" class="thread">
             <h2 class="title center">{{$post[0]->Title}}</h2>
-            <p class="right">At: {{$post[0]->created_at}}</p>
-            <p>By: {{$post[0]->Username}}</p>
+            <p class="right">{{__('messages.At')}}: {{$post[0]->created_at}}</p>
+            <p>{{__('messages.By')}}: {{$post[0]->Username}}</p>
             <p class="message">{{$post[0]->Message}}</p>
             @if ($post[0]->HasAttachments)
                 @foreach (getAtt('forum_data/' . $post[0]->id) as $i)
@@ -49,13 +49,13 @@
                 <div class="center">
                     <form method="POST" onsubmit="forum/{{$post[0]->id}}" enctype="multipart/form-data">
                         @csrf
-                        <label for="message">Message</label>
+                        <label for="message">{{__('messages.Message')}}</label>
                         <textarea id="message" name="message" required="required"></textarea><br>
-                        <label for="file1">1st picture:</label>
+                        <label for="file1">{{__('messages.1st picture')}}:</label>
                         <input name="file1" type="file" id="file1"><br>
-                        <label for="file2">2nd picture:</label>
+                        <label for="file2">{{__('messages.2nd picture')}}:</label>
                         <input name="file2" type="file" id="file2"><br>
-                        <label for="file3">3rd picture:</label>
+                        <label for="file3">{{__('messages.3rd picture')}}:</label>
                         <input name="file3" type="file" id="file3"><br><br>
                         <input type="submit">
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />

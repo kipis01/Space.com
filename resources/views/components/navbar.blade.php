@@ -1,10 +1,12 @@
 <?php include_once '../resources/php/functions.php' ?>
 <nav id="navbar">
     <ul>
-        <li class="logo"><img src="/img/Logo.png" width="50px"></li>
-        <li><a href="/news">News</a></li>
-        <li><a href="/wiki">Wiki</a></li>
-        <li><a href="/forum">Forum</a></li>
+        <li class="logo"><img src="/img/Logo.png" width="50px" alt="logo"></li>
+        <li><a href="/news">{{__('messages.News')}}</a></li>
+        <li><a href="/wiki">{{__('messages.Wiki')}}</a></li>
+        <li><a href="/forum">{{__('messages.Forum')}}</a></li>
+        <li><a href="/lang/en">EN</a></li>
+        <li><a href="/lang/lv">LV</a></li>
         @if (isset(Auth::user()->Username))
         <li class="nav-right droppable">
             <a href="/user/{{Auth::user()->id}}">
@@ -13,9 +15,9 @@
                 <span class="dopdown-icon">&#9662;</span>
             </a>
             <ul class="dropdown">
-                <li><a href="/user/{{Auth::user()->id}}">Profile</a></li>
-                <li><a href="/settings/{{Auth::user()->id}}">Settings</a></li>
-                <li><a href="/user">Users</a></li>
+                <li><a href="/user/{{Auth::user()->id}}">{{__('messages.Profile')}}</a></li>
+                <li><a href="/settings/{{Auth::user()->id}}">{{__('messages.Settings')}}</a></li>
+                <li><a href="/user">{{__('messages.Users')}}</a></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

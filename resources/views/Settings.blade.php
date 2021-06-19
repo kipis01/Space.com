@@ -22,17 +22,17 @@
                 <div class="flex">
                     <div class="center">
                         <img src="/Users/{{$user[0]->id}}/{{findpfp("Users/".$user[0]->id)}}" alt="Profile picture" width="400px" class="center">
-                        <label for="pfp">Select a file to change the profile picture:</label>
+                        <label for="pfp">{{__('messages.Select a file to change the profile picture')}}:</label>
                         <input type="file" id="pfp" name="pfp">
                     </div>
                     <div class="center">
                         <h3 class="center">{{$user[0]->Username}}</h3>
-                        <label for="nickname">Change username</label>
+                        <label for="nickname">{{__('messages.Change username')}}</label>
                         <input type="text" id="nickname" name="nickname"><br><br>
                         @if (Auth::user()->id == $user[0]->id)
-                            <label for="pass1">Change password</label>
+                            <label for="pass1">{{__('messages.Change password')}}</label>
                             <input type="password" id="pass1" name="pass1"><br>
-                            <label for="pass2">Repeat the new password</label>
+                            <label for="pass2">{{__('messages.Repeat the new password')}}</label>
                             <input type="password" id="pass2" name="pass2">
                         @endif
                         @if (Auth::user()->role == 'Admin')
@@ -46,14 +46,14 @@
                     </div>
                 </div>
                 <div class="center">
-                    <label for="pass">To make changes, enter your password: </label>
+                    <label for="pass">{{__('messages.To make changes, enter your password')}}: </label>
                     <input type="password" id="pass" name="pass">
                     <input type="submit">
                 </div>
             </form>
             <div id="delete", class="center">
-                <h2>Delete this account:</h2>
-                <button onclick="deleteAcc()">DELETE</button>
+                <h2>{{__('messages.Delete this account')}}:</h2>
+                <button onclick="deleteAcc()">{{__('messages.DELETE')}}</button>
             </div>
         </div>
     </body>

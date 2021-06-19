@@ -6,6 +6,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\WikiController;
+use App\Http\Controllers\langController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::get('/news/new', [NewsController::class, 'create'])->middleware('auth')->
 Route::post('/news/new', [NewsController::class, 'store'])->name('newArticle')->middleware('auth')->middleware('minimumAccess:Editor');
 Route::get('news/edit/{id}', [NewsController::class, 'edit']);
 Route::post('news/edit/{id}', [NewsController::class, 'update']);
+Route::get('/news/delete/{id}', [NewsController::class, 'destroy'])->middleware('auth')->middleware('minimumAccess:Admin');
 
 Route::get('/wiki', [WikiController::class, 'index']);
 Route::get('/wiki/{id}/v{vid}', [WikiController::class, 'show'])->where('id', '[0-9]+');
@@ -42,6 +44,7 @@ Route::post('/wiki/new', [WikiController::class, 'store'])->middleware('auth')->
 Route::get('/wiki/edit/{id}', [WikiController::class, 'edit'])->where('id', '[0-9]+')->middleware('auth');
 Route::post('/wiki/edit/{id}', [WikiController::class, 'update'])->where('id', '[0-9]+')->middleware('auth');
 Route::get('/wiki/search', [WikiController::class, 'search'])->name('searchWiki');
+Route::get('/wiki/delete/{id}', [WikiController::class, 'destroy'])->middleware('auth')->middleware('minimumAccess:Admin');;
 
 Route::resource('user', UserController::class);
 
@@ -50,9 +53,7 @@ Route::get('/settings/{id}', [UserController::class, 'edit'])->middleware('USpec
 Route::post('/settings/{id}', [UserController::class, 'update'])->middleware('USpecific');
 Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->middleware('USpecific');
 
-Route::get('/testing', function(){
-    return view('testing');
-});
+Route::get('/lang/{locale}', langController::class);
 
 Route::redirect('/dashboard', '/');
 

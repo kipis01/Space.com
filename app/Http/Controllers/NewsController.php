@@ -248,6 +248,8 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        News_Comment::where('Article', $id)->delete();
+        News::where('id', $id)->delete();
+        return redirect('/news');
     }
 }

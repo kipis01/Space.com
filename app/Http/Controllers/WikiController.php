@@ -266,6 +266,8 @@ class WikiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Wiki_Contributor::where('Article', $id)->delete();
+        Wiki::where('id', $id)->delete();
+        return redirect('/wiki');
     }
 }

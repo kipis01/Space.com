@@ -15,16 +15,16 @@
                     <h1 class="center">{{$profile[0]->Username}}</h1>
                 </div>
                 <div id="profile-info">
-                    <h1>Member since: {{$profile[0]->created_at}}</h1>
-                    <h1>Role: {{$profile[0]->Role}}</h1>
-                    <p><a href="/settings/{{$profile[0]->id}}">Edit profile</a></p>
+                    <h1>{{__('messages.Member since')}}: {{$profile[0]->created_at}}</h1>
+                    <h1>{{__('messages.Role')}}: {{$profile[0]->Role}}</h1>
+                    <p><a href="/settings/{{$profile[0]->id}}">{{__('messages.Edit profile')}}</a></p>
                 </div>
             </div>
             @if ($forumPosts != [] || $forumComments != [])
                 <div id="forum">
-                    <h1 class="center">Forum contributions</h1>
+                    <h1 class="center">{{__('messages.Forum contributions')}}</h1>
                     @if ($forumPosts != [])
-                        <h3 class="center">Forum posts</h3>
+                        <h3 class="center">{{__('messages.Forum posts')}}</h3>
                         @foreach ($forumPosts as $i)
                             <div class="box center flex">
                                 @if ($i->HasAttachments)
@@ -32,21 +32,21 @@
                                 @endif
                                 <div class="center">
                                     <h3><a href="/forum/{{$i->id}}">{{$i->Title}}</a></h3>
-                                    <p>Posted: {{$i->created_at}}</p>
+                                    <p>{{__('messages.Posted at')}}: {{$i->created_at}}</p>
                                     <p>{{$i->Message}}</p>
                                 </div>
                             </div>
                         @endforeach
                     @endif
                     @if ($forumComments != [])
-                        <h3 class="center">Forum interactions</h3>
+                        <h3 class="center">{{__('messages.Forum interactions')}}</h3>
                         @foreach ($forumComments as $i)<!--id, Post, created_at, Message, HasAttachments-->
                             <div class="box center flex">
                                 @if ($i->HasAttachments)
                                     <div class="center"><img src="/forum_data/{{$i->Post}}/{{$i->id}}/{{getFirstAtt("forum_data/$i->Post/$i->id")}}" alt="main media" width="300px"></div>
                                 @endif
                                 <div class="center">
-                                    <p><a href="/forum/{{$i->Post}}#{{$i->id}}">Posted: {{$i->created_at}}</a></p>
+                                    <p><a href="/forum/{{$i->Post}}#{{$i->id}}">{{__('messages.Posted at')}}: {{$i->created_at}}</a></p>
                                     <p>{{$i->Message}}</p>
                                 </div>
                             </div>

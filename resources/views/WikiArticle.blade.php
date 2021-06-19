@@ -8,7 +8,12 @@
     <body>
         <x-navbar/>
         <div id="main" class="center">
-            <p><a href="/wiki/{{$article->id}}">See previous versions</a>|<a href="/wiki/edit/{{$article->id}}">Edit this article</a></p>
+            <p>
+                <a href="/wiki/{{$article->id}}">{{__('messages.See previous versions')}}</a>|<a href="/wiki/edit/{{$article->id}}">{{__('messages.Edit this article')}}</a>
+                @if(isset(Auth::user()->id))
+                    |<a href="/wiki/delete/{{$article->id}}" style="color:red;">{{__('messages.Delete this article')}}</a>
+                @endif
+            </p>
             <h3>{{$article->Title}}</h3>
             <div id="stats">
                 <img src="/wiki_data/{{$article->id}}/{{$xml->head->pic}}" alt="{{$article->Title}} main picture">

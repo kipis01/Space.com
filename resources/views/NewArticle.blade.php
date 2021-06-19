@@ -61,14 +61,14 @@
                 @csrf
                 <input type="hidden" name="count" id="count" value="{{isset($xml)?$xml->head->elementc:0}}">
                 <input type="submit"><br>
-                <label for="main_title">Title</label>
+                <label for="main_title">{{__('messages.Title')}}</label>
                 <input type="text" name="main_title" id="main_title" value="{{isset($article)?$article->Title:''}}"><br>
                 @if (isset($xml))
                     <img src="/news_data/{{$article->id}}/{{$xml->head->pic}}" height="200px" alt="Main picture">
                 @endif
-                <label for="main_pic">Main article image: </label>
+                <label for="main_pic">{{__('messages.Main article image')}}: </label>
                 <input type="file" name="main_pic" {{isset($article)?'':'required="required"'}}><br>
-                <label for="main_text">Head text:</label>
+                <label for="main_text">{{__('messages.Head text')}}:</label>
                 <textarea name="main_text" cols="50" rows="10" required="required">{{isset($xml)?$xml->head->text:''}}</textarea>
 
                 @if (isset($xml))
