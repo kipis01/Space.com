@@ -138,4 +138,12 @@ class UserController extends Controller
         File::deleteDirectory(public_path()."/Users/$id");
         return redirect('/');
     }
+
+    public function checkNick(Request $request){
+        $user = User::where('Username', $request->nick)->exists();
+        if ($user){
+            return response()->json(false, 200);
+        }
+        return response()->json(true, 200);
+    }
 }

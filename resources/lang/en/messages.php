@@ -70,4 +70,5 @@ return [
     'Forum posts' => 'Forum posts',
     'Forum interactions' => 'Forum interactions',
     'See previous versions' => 'See previous versions',
+    'The username is already taken!' => 'The username is already taken!',
 ];

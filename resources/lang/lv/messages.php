@@ -66,4 +66,5 @@ return [
     'Forum posts' => 'Foruma publicējumi',
     'Forum interactions' => 'Forumā iesaistīšanās',
     'See previous versions' => 'Apskatīt iepriekšējās versijas',
+    'The username is already taken!' => 'Lietotājvārds ir aizņemts!',
 ];

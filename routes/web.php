@@ -52,6 +52,7 @@ Route::get('/user/{id}', [UserController::class, 'show']);
 Route::get('/settings/{id}', [UserController::class, 'edit'])->middleware('USpecific');
 Route::post('/settings/{id}', [UserController::class, 'update'])->middleware('USpecific');
 Route::get('/user/delete/{id}', [UserController::class, 'destroy'])->middleware('USpecific');
+Route::get('/nickname/check', [UserController::class, 'checkNick'])->name('checkNick');
 
 Route::get('/lang/{locale}', langController::class);
 
