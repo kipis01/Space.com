@@ -118,5 +118,36 @@ class DatabaseSeeder extends Seeder
             'created_at' => $time,
             'Message' => 'Interesting...',
         ]);
+
+        DB::table('Wiki')->insert([
+            'id' => '1',
+            'Title' => 'Space Shuttle',
+            'Author' => '1',
+            'created_at' => $time,
+            'Version' => '2',
+        ]);
+        /*DB::table('Wiki')->insert([
+            'id' => '2',
+            'Title' => 'Hubble Space Telescope',
+            'Author' => '3',
+            'created_at' => $time,
+            'Version' => '1',
+        ]);*/
+
+        DB::table('Wiki_contributors')->insert([
+            'Article' => '1',
+            'Contributor' => '1',
+            'Version' => '1',
+        ]);
+        DB::table('Wiki_contributors')->insert([
+            'Article' => '1',
+            'Contributor' => '3',
+            'Version' => '2',
+        ]);
+        /*DB::table('Wiki_contributors')->insert([
+            'Article' => '2',
+            'Contributor' => '3',
+            'Version' => '1',
+        ]);*/
     }
 }

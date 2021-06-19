@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\WikiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,6 @@ use App\Http\Controllers\NewsController;
 
 Route::redirect('/', '/news');
 
-Route::get('/wiki', function(){
-    return view('Temp');
-});
-
 Route::resource('forum', ForumController::class);
 Route::post('forum', [ForumController::class, 'store'])->name('NewForumPost');
 Route::get('/forum/{id}', [ForumController::class, 'show']);
@@ -36,6 +33,15 @@ Route::get('/news/new', [NewsController::class, 'create'])->middleware('auth')->
 Route::post('/news/new', [NewsController::class, 'store'])->name('newArticle')->middleware('auth')->middleware('minimumAccess:Editor');
 Route::get('news/edit/{id}', [NewsController::class, 'edit']);
 Route::post('news/edit/{id}', [NewsController::class, 'update']);
+
+Route::get('/wiki', [WikiController::class, 'index']);
+Route::get('/wiki/{id}/v{vid}', [WikiController::class, 'show'])->where('id', '[0-9]+');
+Route::get('/wiki/{id}', [WikiController::class, 'showVers'])->where('id', '[0-9]+');
+Route::get('/wiki/new', [WikiController::class, 'create'])->middleware('auth');
+Route::post('/wiki/new', [WikiController::class, 'store'])->middleware('auth')->name('newWiki');
+Route::get('/wiki/edit/{id}', [WikiController::class, 'edit'])->where('id', '[0-9]+')->middleware('auth');
+Route::post('/wiki/edit/{id}', [WikiController::class, 'update'])->where('id', '[0-9]+')->middleware('auth');
+Route::get('/wiki/search', [WikiController::class, 'search'])->name('searchWiki');
 
 Route::resource('user', UserController::class);
 

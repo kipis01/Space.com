@@ -11,13 +11,20 @@ use App\Models\User;
 class Wiki_Contributor extends Model
 {
     protected $table = 'Wiki_Contributors';
+
+    protected $fillable = [
+        'Article',
+        'Contributor',
+        'Version'
+    ];
+
     use HasFactory;
 
     public function Wiki() { // FK relationship
-        return $this->belongsTo(Wiki::class);
+        return $this->belongsTo(Wiki::class, 'Article');
     }
 
     public function User() { // FK relationship
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'Contributor');
     }
 }

@@ -9,7 +9,7 @@
     <body>
         <x-navbar/>
         <div id="main" class="center">
-            @if (Auth::user()->id == $article['Author'] || Auth::user()->role == 'Admin')
+            @if (isset(Auth::user()->id) && (Auth::user()->id == $article['Author'] || Auth::user()->role == 'Admin'))
                 <h5><a href="/news/edit/{{$article['id']}}">Edit this article</a></h5>
             @endif
             <h1 class="center">{{$article['Title']}}</h5>
